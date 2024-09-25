@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-link-deploy
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      components: front
+  template: 
+    metadata:
+      labels:
+        components: front
+    spec:
+      containers:
+      - name: short-link
+        image: bazdoc/short-link:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "300m"
