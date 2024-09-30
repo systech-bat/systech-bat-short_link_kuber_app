@@ -1,0 +1,44 @@
+установил контроллер ingress-nginx:
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+
+проверил что установился:
+kubectl get ingressclass
+NAME    CONTROLLER             PARAMETERS   AGE
+nginx   k8s.io/ingress-nginx   <none>       3m56s
+
+проверил что контроллер заработал:
+
+get pods -n ingress-nginx
+NAME                                        READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create-k482j        0/1     Completed   0          84s
+ingress-nginx-admission-patch-szbhz         0/1     Completed   1          84s
+ingress-nginx-controller-5b56686445-49cxm   1/1     Running     0          84s
+
+
+проверил статус
+kubectl get ing
+NAME                 CLASS    HOSTS                   ADDRESS   PORTS   AGE
+short-link-ingress   <none>   master1.cluster.local             80      21s
+
+установка metallb.yml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.10/config/manifests/metallb-native.yaml
+
+запуск:
+
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: default-ip-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 192.168.1.100-192.168.1.200
+
+  запуск l2
+
+  apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: default
+  namespace: metallb-system
+spec: {}
