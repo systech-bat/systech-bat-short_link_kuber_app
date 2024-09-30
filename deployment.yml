@@ -4,10 +4,10 @@ metadata:
   name: short-link-deploy
 spec:
   replicas: 1
-  selector: 
+  selector:
     matchLabels:
       components: front
-  template: 
+  template:
     metadata:
       labels:
         components: front
