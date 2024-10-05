@@ -22,11 +22,24 @@ spec:
           name: postgres-storage
         env:
           - name: POSTGRES_DB
-            value: db01
+            valueFrom:
+              secretKeyRef:
+                name: pg-secret01
+                key: POSTGRES_DB
           - name: POSTGRES_USER
-            value: user01
+            valueFrom:
+              secretKeyRef:
+                name: pg-secret01
+                key: POSTGRES_USER
           - name: POSTGRES_PASSWORD
-            value: password123
+            valueFrom:
+              secretKeyRef:
+                name: pg-secret01
+                key: POSTGRES_PASSWORD
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "300m"
       volumes:
       - name: postgres-storage
         persistentVolumeClaim:
