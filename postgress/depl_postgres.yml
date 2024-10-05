@@ -6,25 +6,28 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      component: postgres
+      app: postgres
   template:
     metadata:
       labels:
-        component: postgres
+        app: postgres
     spec:
       containers:
-      - name: posgresv16
+      - name: postgresv16
         image: postgres:16
         ports:
-         - containerPort: 5432
+        - containerPort: 5432
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgres-storage
         env:
           - name: POSTGRES_DB
             value: db01
           - name: POSTGRES_USER
             value: user01
           - name: POSTGRES_PASSWORD
-            value: "85983662"
-        resources:
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
+            value: password123
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-pvc01
