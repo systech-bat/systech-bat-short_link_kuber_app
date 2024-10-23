@@ -8,7 +8,7 @@ nginx   k8s.io/ingress-nginx   <none>       3m56s
 
 проверил что контроллер заработал:
 
-get pods -n ingress-nginx
+kubectl get pods -n ingress-nginx
 NAME                                        READY   STATUS      RESTARTS   AGE
 ingress-nginx-admission-create-k482j        0/1     Completed   0          84s
 ingress-nginx-admission-patch-szbhz         0/1     Completed   1          84s

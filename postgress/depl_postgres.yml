@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: short-link-postgres
+  namespace: short-link
 spec:
   replicas: 1
   selector:
@@ -38,9 +39,10 @@ spec:
                 key: POSTGRES_PASSWORD
         resources:
           limits:
-            memory: "128Mi"
+            memory: "512Mi"
             cpu: "100m"
       volumes:
       - name: postgres-storage
         persistentVolumeClaim:
           claimName: postgres-pvc01
+ 

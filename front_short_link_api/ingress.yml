@@ -1,13 +1,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress01
+  name: ingress01-short-link
+  namespace: short-link
   annotations:
     nginx.ingress.kubernetes.io/add-base-url: "true"
 spec:
   ingressClassName: nginx
   rules:
-  - host: 192.168.1.100.nip.io
+  - host: short-link.test
     http:
       paths:
       - pathType: Prefix
