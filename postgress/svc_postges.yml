@@ -9,4 +9,4 @@ spec:
     - port: 5432
       protocol: TCP
   selector:
-    components: postgres
+    app: postgres
