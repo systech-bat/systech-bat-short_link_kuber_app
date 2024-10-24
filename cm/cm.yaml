@@ -1,0 +1,8 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: cm01
+  namespace: short-link
+data:
+  key: value
+---

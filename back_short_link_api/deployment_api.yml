@@ -24,13 +24,15 @@ spec:
             cpu: "100m"
         env:
           - name: DATABASE_URL
-            value: postgresql://user01:password123@postgres-clusterip:5432/db01
-
-
-
-#
-#            valueFrom:
-#              secretKeyRef:
-#                name: api-secret01
-#                key: DATABASE_URL            
-# postgresql://user01:password123@postgres-clusterip:5432/db01          
+            valueFrom:
+              secretKeyRef:
+                name: api-secret01
+                key: DATABASE_URL   
+        volumeMounts:
+          - name: cm-volume
+            mountPath: /etc/test_cm
+            readOnly: true
+      volumes:
+        - name: cm-volume
+          configMap:
+            name: cm01
