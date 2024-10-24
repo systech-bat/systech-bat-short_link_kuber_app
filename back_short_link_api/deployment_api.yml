@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: short-link-api-deploy
+  name: back-short-link-api-deploy
   namespace: short-link
 spec:
   replicas: 1
@@ -31,8 +31,8 @@ spec:
         volumeMounts:
           - name: cm-volume
             mountPath: /etc/test_cm
-            readOnly: true
+            readOnly: true 
       volumes:
-        - name: cm-volume
-          configMap:
-            name: cm01
+      - name: cm-volume
+        configMap:
+          name: cm01

@@ -22,3 +22,13 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "100m"
+        livenessProbe:
+          exec:
+            command:
+              - curl
+              - --fail
+              - http://localhost:3000/api
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          failureThreshold: 1         
+
